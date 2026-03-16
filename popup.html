@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>AI Resume</title>
+    <style>
+      /* O Pop-up precisa ter tamanho fixo com barra de rolagem */
+      body {
+        font-family: system-ui, sans-serif;
+        padding: 15px;
+        width: 500px;
+        max-height: 550px;
+        margin: 0;
+        overflow-y: auto;
+      }
+      h2,
+      h3 {
+        margin-top: 0;
+        font-size: 16px;
+      }
+      .form-group {
+        margin-bottom: 12px;
+      }
+      label {
+        display: block;
+        margin-bottom: 4px;
+        font-weight: bold;
+        font-size: 13px;
+      }
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 6px;
+        box-sizing: border-box;
+        font-size: 13px;
+        font-family: monospace;
+      }
+      button {
+        width: 100%;
+        padding: 8px;
+        background: #0a66c2;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      button:hover {
+        background: #004182;
+      }
+      #generateJsonBtn {
+        background: #059669;
+      }
+      #generateJsonBtn:hover {
+        background: #047857;
+      }
+      #saveEditedJsonBtn {
+        background: #d97706;
+      }
+      #saveEditedJsonBtn:hover {
+        background: #b45309;
+      }
+      #status {
+        margin-top: 10px;
+        font-weight: bold;
+        font-size: 13px;
+        text-align: center;
+      }
+      .divider {
+        border-top: 1px solid #ccc;
+        margin: 15px 0;
+      }
+    </style>
+    <script src="lib/pdf.min.js"></script>
+  </head>
+  <body>
+    <div
+      id="generator-section"
+      style="
+        background: #eef2ff;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #c7d2fe;
+        margin-bottom: 20px;
+      "
+    >
+      <h2 style="margin-top: 0; color: #4338ca; font-size: 18px">
+        🚀 Gerar Currículo para Vaga
+      </h2>
+
+      <div class="form-group">
+        <label for="languageSelect">Idioma do Currículo Final:</label>
+        <select
+          id="languageSelect"
+          style="
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+          "
+        >
+          <option value="Português (PT-BR)">Português (PT-BR)</option>
+          <option value="Inglês (EN-US)">Inglês (EN-US)</option>
+        </select>
+      </div>
+
+      <button
+        id="captureAndGenerateBtn"
+        style="
+          background: #4338ca;
+          font-size: 15px;
+          padding: 12px;
+          margin-top: 10px;
+        "
+      >
+        Capturar Vaga do LinkedIn e Gerar
+      </button>
+
+      <div
+        id="generatorStatus"
+        style="
+          margin-top: 10px;
+          font-weight: bold;
+          font-size: 13px;
+          text-align: center;
+          color: #4338ca;
+        "
+      ></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>⚙️ Setup do Currículo</h2>
+
+    <div class="form-group">
+      <label>Chaves de API do Gemini (separadas por vírgula):</label>
+      <textarea
+        id="apiKeys"
+        rows="2"
+        placeholder="AIzaSy..., AIzaTy..."
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>1. Upload do Currículo Base (PDF):</label>
+      <input type="file" id="resumePdf" accept="application/pdf" />
+    </div>
+    <button id="saveBtn">Extrair Texto do PDF</button>
+
+    <div id="status"></div>
+
+    <textarea id="extractedTextPreview" style="display: none"></textarea>
+
+    <div class="divider"></div>
+
+    <div class="form-group">
+      <label>2. Gerar Base de Dados Estruturada:</label>
+      <button id="generateJsonBtn">Processar com IA</button>
+    </div>
+
+    <div class="form-group">
+      <label>3. Master JSON (Você pode editar isso livremente):</label>
+      <textarea
+        id="masterJsonPreview"
+        rows="12"
+        placeholder="O JSON aparecerá aqui. Você pode adicionar/remover itens..."
+      ></textarea>
+      <button id="saveEditedJsonBtn">Salvar Edições do JSON</button>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

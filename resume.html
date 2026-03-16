@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title id="r-title">Resume</title>
+    <style>
+      /* Estilos para a Tela (Preview) */
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background-color: #f3f4f6;
+        color: #333;
+        margin: 0;
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .controls {
+        margin-bottom: 20px;
+      }
+      .btn {
+        background: #4338ca;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .btn:hover {
+        background: #3730a3;
+      }
+
+      /* A "Folha" de Papel A4 */
+      .resume-page {
+        background: white;
+        width: 21cm;
+        min-height: 29.7cm;
+        padding: 2cm;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        line-height: 1.5;
+      }
+
+      /* Tipografia do Currículo */
+      h1 {
+        margin: 0 0 10px 0;
+        font-size: 28px;
+        text-align: center;
+        color: #111;
+      }
+      .contact-info {
+        text-align: center;
+        font-size: 14px;
+        margin-bottom: 25px;
+        color: #555;
+      }
+      .contact-info span {
+        margin: 0 8px;
+      }
+
+      h2 {
+        font-size: 18px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 5px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        color: #111;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      p {
+        margin: 0 0 10px 0;
+        font-size: 14px;
+        text-align: justify;
+      }
+
+      .item-header {
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+        margin-bottom: 3px;
+        font-size: 15px;
+      }
+      .item-sub {
+        font-style: italic;
+        color: #555;
+        font-size: 14px;
+        margin-bottom: 8px;
+      }
+      .item-body {
+        font-size: 14px;
+        margin-bottom: 15px;
+        text-align: justify;
+      }
+
+      /* Estilos Específicos para a Impressora (PDF) */
+      @media print {
+        @page {
+          margin: 15mm 20mm 15mm 20mm;
+          size: A4 portrait;
+        }
+        body {
+          background: none;
+          padding: 0;
+          display: block;
+        }
+        .controls {
+          display: none; /* Esconde os botões na hora de imprimir */
+        }
+        .resume-page {
+          width: 100%;
+          min-height: auto;
+          padding: 0;
+          margin: 0;
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="controls">
+      <button class="download-btn">
+        🖨️ Salvar como PDF Novamente
+      </button>
+    </div>
+
+    <div class="resume-page" id="resume-content">
+      <h1 id="r-name">Nome</h1>
+      <div class="contact-info" id="r-contact"></div>
+
+      <h2 id="r-summary-title">Resumo Profissional</h2>
+      <p id="r-summary">Resumo...</p>
+
+      <h2 id="r-skills-title">Competências Técnicas</h2>
+      <p id="r-skills"><strong>Principais:</strong> ...</p>
+
+      <h2 id="r-experience-title">Experiência Profissional</h2>
+      <div id="r-experience"></div>
+
+      <h2 id="r-education-title">Formação Acadêmica</h2>
+      <div id="r-education"></div>
+    </div>
+
+    <script src="resume.js"></script>
+  </body>
+</html>

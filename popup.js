@@ -396,6 +396,7 @@ async function processarVaga(rawText, language, statusDiv, isManual) {
         const extracaoResult = await fetchWithKeyRotation(
           extracaoPayload,
           data.apiKeys,
+        "gemini-3-flash-preview"
         );
         const extracaoJson = JSON.parse(
           extracaoResult.candidates[0].content.parts[0].text,
@@ -484,7 +485,7 @@ async function processarVaga(rawText, language, statusDiv, isManual) {
       const geracaoResult = await fetchWithKeyRotation(
         geracaoPayload,
         data.apiKeys,
-        "gemini-3.1-flash-preview"
+        "gemini-3.1-flash-lite-preview"
       );
       const tailoredResumeData = JSON.parse(
         geracaoResult.candidates[0].content.parts[0].text,

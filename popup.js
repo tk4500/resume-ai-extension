@@ -484,6 +484,7 @@ async function processarVaga(rawText, language, statusDiv, isManual) {
       const geracaoResult = await fetchWithKeyRotation(
         geracaoPayload,
         data.apiKeys,
+        "gemini-3.1-flash-preview"
       );
       const tailoredResumeData = JSON.parse(
         geracaoResult.candidates[0].content.parts[0].text,

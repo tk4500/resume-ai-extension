@@ -1,6 +1,8 @@
 // Configura o worker do PDF.js (necessário para performance)
 pdfjsLib.GlobalWorkerOptions.workerSrc = "lib/pdf.worker.min.js";
 
+const MODEL_ID = "gemini-3-flash-preview";
+
 document.getElementById("saveBtn").addEventListener("click", async () => {
   const apiKeysInput = document.getElementById("apiKeys").value;
   const fileInput = document.getElementById("resumePdf");
@@ -206,7 +208,7 @@ document
         const result = await fetchWithKeyRotation(
           payload,
           data.apiKeys,
-          "gemini-3.1-flash-lite-preview",
+          MODEL_ID
         );
 
         if (result.error) {
@@ -349,7 +351,6 @@ async function processarVaga(rawText, language, statusDiv, isManual) {
       return;
     }
 
-    const MODEL_ID = "gemini-3.1-flash-lite-preview";
     let jobTitle = "Vaga (Inserção Manual)";
     let jobDescription = rawText;
 
@@ -396,7 +397,7 @@ async function processarVaga(rawText, language, statusDiv, isManual) {
         const extracaoResult = await fetchWithKeyRotation(
           extracaoPayload,
           data.apiKeys,
-        "gemini-3-flash-preview"
+          MODEL_ID
         );
         const extracaoJson = JSON.parse(
           extracaoResult.candidates[0].content.parts[0].text,
@@ -485,11 +486,12 @@ async function processarVaga(rawText, language, statusDiv, isManual) {
       const geracaoResult = await fetchWithKeyRotation(
         geracaoPayload,
         data.apiKeys,
-        "gemini-3.1-flash-lite-preview"
+        MODEL_ID
       );
       const tailoredResumeData = JSON.parse(
         geracaoResult.candidates[0].content.parts[0].text,
       );
+      tailoredResumeData.language = language; // Adiciona o idioma selecionado para uso futuro na formatação do PDF
 
       // Salva e abre a página de impressão
       chrome.storage.local.set({ tailoredResume: tailoredResumeData }, () => {
